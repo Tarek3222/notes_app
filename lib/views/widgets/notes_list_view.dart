@@ -3,13 +3,25 @@ import 'package:notes_app/views/widgets/custom_note_item.dart';
 
 class NotesListView extends StatelessWidget {
   const NotesListView({super.key});
-
+ final List<Color> colors=const[
+  Colors.orange,
+  Colors.green,
+  Colors.blue,
+  Colors.pink,
+  Colors.yellow,
+  Colors.purple,
+  Colors.grey,
+  Colors.red,
+  Colors.blueGrey,
+  Colors.teal
+ ];
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+          itemCount: colors.length,
           itemBuilder: (context, index) {
-            return const CustomNoteItem();
+            return  CustomNoteItem(color: colors[index],);
           }),
     );
   }
