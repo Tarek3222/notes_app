@@ -19,6 +19,7 @@ class NotesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+          padding: const EdgeInsets.only(top: 12),
           itemCount: colors.length,
           itemBuilder: (context, index) {
             return  CustomNoteItem(color: colors[index],);
