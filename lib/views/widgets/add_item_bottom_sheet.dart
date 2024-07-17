@@ -9,17 +9,19 @@ class AddItemBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Padding(
       padding:const  EdgeInsets.symmetric(vertical: 24,horizontal: 16),
-      child:  Column(
-        children: [
-         const SizedBox(height: 10,),
-         const CustomTextFormField(hintText: 'Title',verticalPadding: 16,),
-         const SizedBox(
-            height: 15,
-          ),
-         const CustomTextFormField(hintText: 'Content',verticalPadding: 70,),
-         const Spacer(),
-          CustomButton(text: 'Add',onPressed: (){},),
-        ],
+      child:  SingleChildScrollView(
+        child: Column(
+          children: [
+           const SizedBox(height: 10,),
+           const CustomTextFormField(hintText: 'Title',),
+           const SizedBox(
+              height: 15,
+            ),
+           const CustomTextFormField(hintText: 'Content',maxLines: 5,),
+           const SizedBox(height: 70,),
+            CustomButton(text: 'Add',onPressed: (){},),
+          ],
+        ),
       ),
     );
   }

@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
-             minimumSize:const Size(double.infinity, 50),
+             minimumSize: Size(MediaQuery.of(context).size.width, 50),
             ),
             child:  Text(text,
             style:const TextStyle(
