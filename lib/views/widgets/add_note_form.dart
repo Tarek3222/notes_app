@@ -6,7 +6,8 @@ import 'package:notes_app/views/widgets/custom_button.dart';
 import 'package:notes_app/views/widgets/custom_text_field.dart';
 
 class AddNoteForm extends StatefulWidget {
-  const AddNoteForm({super.key});
+  const AddNoteForm({super.key,  this.isLoading=false});
+  final bool isLoading;
 
   @override
   State<AddNoteForm> createState() => _AddNoteFormState();
@@ -63,23 +64,23 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 70,
           ),
-          CustomButton(
-            text: 'Add',
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-                var noteModel = NoteModel(
-                    title: title!,
-                    content: content!,
-                    date: DateTime.now().toString(),
-                    color: Colors.blue.value);
-                BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
-            },
-          ),
+         widget.isLoading?const CircularProgressIndicator(color: Colors.white,): CustomButton(
+                text: 'Add',
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
+                    var noteModel = NoteModel(
+                        title: title!,
+                        content: content!,
+                        date: DateTime.now().toString(),
+                        color: Colors.blue.value);
+                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              ),
         ],
       ),
     );
