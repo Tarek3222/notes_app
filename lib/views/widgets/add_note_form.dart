@@ -27,7 +27,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
       child: Column(
         children: [
           const SizedBox(
-            height: 10,
+            height: 16,
           ),
           CustomTextFormField(
             hintText: 'Title',
@@ -62,7 +62,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             },
           ),
           const SizedBox(
-            height: 70,
+            height: 40,
           ),
          widget.isLoading?const CircularProgressIndicator(color: Colors.white,): CustomButton(
                 text: 'Add',
@@ -81,6 +81,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   }
                 },
               ),
+            const  SizedBox(height: 12,)
         ],
       ),
     );
