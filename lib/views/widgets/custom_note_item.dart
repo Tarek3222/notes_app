@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_notes_view.dart';
 
@@ -13,6 +15,7 @@ class CustomNoteItem extends StatelessWidget {
       key: Key(noteItem.key.toString()),
       onDismissed: (_) {
         noteItem.delete();
+        BlocProvider.of<NotesCubit>(context).fetchALLNotes();
       },
       child: GestureDetector(
         onTap: () {
@@ -52,8 +55,9 @@ class CustomNoteItem extends StatelessWidget {
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: ()async {
+                  onPressed: () {
                     noteItem.delete();
+                    BlocProvider.of<NotesCubit>(context).fetchALLNotes();
                   },
                   icon: const Icon(
                     FontAwesomeIcons.trash,
