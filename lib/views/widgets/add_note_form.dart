@@ -70,10 +70,11 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    var currentDateFormatted=Jiffy.now().yMMMMd;
                     var noteModel = NoteModel(
                         title: title!,
                         content: content!,
-                        date: Jiffy.now().yMMMMd,
+                        date: currentDateFormatted,
                         color: Colors.blue.value);
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                   } else {

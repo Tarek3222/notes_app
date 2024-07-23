@@ -9,62 +9,70 @@ class CustomNoteItem extends StatelessWidget {
   final NoteModel noteItem;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return const EditNotesView();
-          }),
-        );
+    return Dismissible(
+      key: Key(noteItem.key.toString()),
+      onDismissed: (_) {
+        noteItem.delete();
       },
-      child: Container(
-        padding: const EdgeInsets.only(top: 24, bottom: 24, left: 16),
-        margin: const EdgeInsets.only(bottom: 8),
-        decoration: BoxDecoration(
-          color: Color(noteItem.color),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            ListTile(
-              title:  Text(
-                noteItem.title,
-                style:const TextStyle(
-                  color: Colors.black,
-                  fontSize: 26,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return const EditNotesView();
+            }),
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.only(top: 24, bottom: 24, left: 16),
+          margin: const EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            color: Color(noteItem.color),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ListTile(
+                title:  Text(
+                  noteItem.title,
+                  style:const TextStyle(
+                    color: Colors.black,
+                    fontSize: 26,
+                  ),
                 ),
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 16),
-                child: Text(
-                  noteItem.content,
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.4),
-                    letterSpacing: -0.1,
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
+                  child: Text(
+                    noteItem.content,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.4),
+                      letterSpacing: -0.1,
+                    ),
+                  ),
+                ),
+                trailing: IconButton(
+                  onPressed: ()async {
+                    noteItem.delete();
+                  },
+                  icon: const Icon(
+                    FontAwesomeIcons.trash,
+                    color: Colors.black,
+                    size: 22,
                   ),
                 ),
               ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  FontAwesomeIcons.trash,
-                  color: Colors.black,
-                  size: 22,
+              Padding(
+                padding: const EdgeInsets.only(right: 24),
+                child: Text(
+                  noteItem.date,
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.4),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24),
-              child: Text(
-                noteItem.date,
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.4),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
