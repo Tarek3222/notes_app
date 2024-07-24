@@ -63,9 +63,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
               return null;
             },
           ),
+          const SizedBox(
+            height: 36,
+          ),
           const ColorsListView(),
           const SizedBox(
-            height: 40,
+            height: 36,
           ),
          widget.isLoading?const CircularProgressIndicator(color: Colors.white,): CustomButton(
                 text: 'Add',
