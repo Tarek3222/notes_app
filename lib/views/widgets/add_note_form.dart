@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/views/widgets/colors_list_view.dart';
 import 'package:notes_app/views/widgets/custom_button.dart';
 import 'package:notes_app/views/widgets/custom_text_field.dart';
 
@@ -62,6 +63,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               return null;
             },
           ),
+          const ColorsListView(),
           const SizedBox(
             height: 40,
           ),
@@ -70,13 +72,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    var currentDateFormatted=Jiffy.now().yMMMMd;
-                    var noteModel = NoteModel(
-                        title: title!,
-                        content: content!,
-                        date: currentDateFormatted,
-                        color: Colors.blue.value);
-                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    addNote(context);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
@@ -87,5 +83,15 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ],
       ),
     );
+  }
+
+  void addNote(BuildContext context) {
+      var currentDateFormatted=Jiffy.now().yMMMMd;
+    var noteModel = NoteModel(
+        title: title!,
+        content: content!,
+        date: currentDateFormatted,
+        color: Colors.blue.value);
+    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
   }
 }
